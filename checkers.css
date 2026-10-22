@@ -1,0 +1,32 @@
+/* Checkers game. The rules engine owns legal moves; the page renders the board and delegates computer decisions to a worker.
+ * Page-specific layout and controls; shared theme colors are supplied by /Theme.css.
+ */
+html, body { height: 100%; margin: 0; }
+body { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+#nav-placeholder { flex: 0 0 auto; position: sticky; top: 0; z-index: 1030; background: var(--site-surface); }
+.checkers-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; flex: 1 1 0; min-height: 0; }
+#checkers-view { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+#checkers-view canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; touch-action: none; }
+.checkers-panel { overflow-y: auto; padding: 24px; background: var(--site-surface); border-left: 1px solid var(--site-border); }
+.checkers-panel h1 { font-size: 2rem; }
+.checkers-panel h2 { font-size: 1rem; margin: 24px 0 12px; }
+#game-status { color: var(--site-accent); font-size: 1.15rem; font-weight: 600; }
+#selection-status, .checkers-panel small { color: var(--site-muted); font-size: .8rem; }
+.checkers-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.checkers-actions button { font-size: .8rem; }
+#move-history { max-height: 35vh; overflow-y: auto; margin-bottom: 20px; font-size: .85rem; }
+.move-row { display: grid; grid-template-columns: 36px 1fr 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--site-border); }
+.move-row span:first-child { color: var(--site-muted); }
+/* Stack or resize the project layout on narrower screens. */
+@media (max-width: 767.98px) {
+    body { height: auto; min-height: 100dvh; }
+    .checkers-layout { display: flex; flex-direction: column; flex: 0 0 auto; }
+    #checkers-view { height: 60vh; min-height: 360px; }
+    .checkers-panel { overflow: visible; border-left: 0; border-top: 1px solid var(--site-border); }
+}
+
+
+.side-hint, #selection-status, #piece-count { color: var(--site-muted); font-size: .8rem; margin-top: 12px; }
+.checkers-panel details { color: var(--site-muted); font-size: .8rem; margin: 18px 0; }
+.checkers-panel summary { color: var(--site-accent); cursor: pointer; }
+#scene-error { position: absolute; z-index: 2; margin: 20px; padding: 20px; background: var(--site-surface); border: 1px solid var(--site-accent); }

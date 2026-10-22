@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- Checkers game. The rules engine owns legal moves; the page renders the board and delegates computer decisions to a worker. -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Play checkers against AI on a Three.js board. Choose Red or Black.">
+    <title>Checkers — Three.js</title>
+    <link rel="stylesheet" href="/Lib/Bootstrap4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/NavBar.css">
+    <link rel="stylesheet" href="./checkers.css">
+    <link rel="stylesheet" href="/Theme.css?v=2">
+    <script type="importmap">{ "imports": { "three": "../../Lib/Three/Three.js" } }</script>
+    <script src="/NavBar.js" defer></script>
+    <link rel="canonical" href="https://louisdubeux.com/Projects/checkers/checkers.html">
+</head>
+<body>
+    <!-- Shared navigation is populated by /NavBar.js. -->
+    <div id="nav-placeholder"></div>
+    <main class="checkers-layout">
+        <div id="checkers-view" aria-label="Interactive 3D checkers board"><p id="scene-error" role="alert" hidden></p></div>
+        <aside class="checkers-panel">
+            <p class="section-label">Player vs AI · Three.js</p><h1>Checkers</h1>
+            <p id="game-status" role="status" aria-live="polite">Loading board…</p>
+            <label for="player-color">Play as</label>
+            <select id="player-color" class="custom-select"><option value="1">Red — you move first</option><option value="-1">Black — AI moves first</option></select>
+            <p class="side-hint">Changing sides starts a new game.</p>
+            <div class="checkers-actions"><button id="new-game" class="btn btn-primary" type="button">New game</button><button id="undo" class="btn btn-outline-light" type="button">Undo turn</button><button id="flip" class="btn btn-outline-light" type="button">Flip board</button></div>
+            <p id="selection-status" role="status">Select a piece, then a highlighted square.</p>
+            <p id="piece-count"></p><h2>Moves</h2><div id="move-history" tabindex="0" aria-label="Move history"></div>
+            <details><summary>How to play</summary><p>American checkers: Red moves first. Men move and capture diagonally forward. Captures are mandatory, and a multi-jump must be completed with the same piece. Any available complete capture sequence may be chosen.</p><p>Reaching the far row makes a king and ends the turn. Kings move and capture diagonally in either direction, one square or jump at a time. Win by leaving your opponent without a legal move.</p><p>Draws: threefold repetition, or 40 moves by each side with no capture or man moving.</p></details>
+            <small>Click to select and move. Drag to orbit · Scroll to zoom. Double-stacked pieces with a gold ring are kings.</small>
+        </aside>
+    </main>
+    <!-- Load the project entry module after its controls and view containers exist. -->
+    <script type="module" src="./checkers.js"></script>
+</body>
+</html>
